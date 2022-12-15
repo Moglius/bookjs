@@ -1,7 +1,8 @@
-<li class="booklist">
+<li>
     <img src="{{ book.src }}" alt="{{ book.name }}" width="80">
-    <p class="booktitle">{{ book.name | titlecase }}</p>
+    <p >{{ book.name | titlecase }}</p>
     <p><i>{{ book.author | titlecase }}</i></p>
     <p><b>{{ book.price | currency: 'USD' }}</b></p>
-    <button (click)="addToCart()">Add to Cart</button>
+    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" *ngIf="!inCart" (click)="addToCart()">Add to Cart</button>
+    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" *ngIf="inCart" (click)="removeFromCart()">Remove from Cart</button>
 </li>

@@ -24,10 +24,6 @@ export class BooksComponent {
     this.isDisable = !this.isDisable;
   }
 
-  handleInput(event: any) {
-    this.myName = event.target.value;
-  }
-
   addToCart(book: Book){
 
     this.cart.push(book)

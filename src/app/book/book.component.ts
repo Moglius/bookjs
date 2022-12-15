@@ -1,3 +1,4 @@
+import { CartService } from './../services/cart.service';
 import { Book } from './../types/book';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 
@@ -8,15 +9,25 @@ import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@a
 })
 export class BookComponent implements OnDestroy{
 
+  @Input() book: Book = {} as Book;
+  inCart = false;
+
+  constructor(private cartService: CartService){}
+
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    console.log("hola");
   }
 
-  @Input() book: Book = {} as Book;
-  @Output() bookEmitter = new EventEmitter<Book>();
-
   addToCart() {
-    this.bookEmitter.emit(this.book)
+    this.inCart = true;
+    this.cartService.add(this.book)
+  }
+
+  removeFromCart() {
+    if (this.inCart) {
+      this.inCart = false;
+      this.cartService.removeFromCart(this.book);
+    }
   }
 
 }
