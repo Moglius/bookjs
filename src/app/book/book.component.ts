@@ -1,21 +1,27 @@
 import { CartService } from './../services/cart.service';
 import { Book } from './../types/book';
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss']
 })
-export class BookComponent implements OnDestroy{
+export class BookComponent implements OnDestroy, OnInit{
 
   @Input() book: Book = {} as Book;
   inCart = false;
 
-  constructor(private cartService: CartService){}
+  constructor(private cartService: CartService){ }
+
+  ngOnInit(): void {
+    console.log("ngOnInit");
+    this.inCart = this.cartService.isInCart(this.book);
+  }
+
 
   ngOnDestroy(): void {
-    console.log("hola");
+    console.log("ngOnDestroy");
   }
 
   addToCart() {
@@ -24,10 +30,8 @@ export class BookComponent implements OnDestroy{
   }
 
   removeFromCart() {
-    if (this.inCart) {
-      this.inCart = false;
-      this.cartService.removeFromCart(this.book);
-    }
+    this.inCart = false;
+    this.cartService.removeFromCart(this.book);
   }
 
 }

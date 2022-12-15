@@ -21,4 +21,13 @@ export class CartService {
       if (item.name === book.name) this.cart.splice(idx,1);
     });
   }
+
+  isInCart(book: Book) {
+    let exist = false;
+    this.cart.forEach( (item) => {
+      if (item.name === book.name) exist = true;
+    });
+
+    return exist;
+  }
 }
