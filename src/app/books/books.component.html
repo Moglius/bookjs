@@ -1,7 +1,7 @@
 <div>
     <h2>Book list:</h2>
-    <button (click)="handleClick()" [disabled]="isDisable">Show Books</button>
-    <button (click)="handleClick()" [disabled]="!isDisable">unShow Books</button>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="handleClick()" [disabled]="isDisable" [hidden]="isDisable">Show Books</button>
+    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="handleClick()" [disabled]="!isDisable" [hidden]="!isDisable">unShow Books</button>
 </div>
 <br>
 <div>
@@ -9,13 +9,10 @@
     <p>{{ myName }}</p>
 </div>
 <br>
-<div>
-    <p>Amount books in cart: <b>{{ cart.length }}</b></p>
-</div>
 <div *ngIf="isDisable">
-    <ul>
+    <ul class="flex flex-wrap justify-center">
         <ng-container *ngFor="let book of books; let i=index">
-            <app-book (bookEmitter)="addToCart($event)" [book]="book"></app-book>
+            <app-book [book]="book" class="w-1/8 p-5 text-center"></app-book>
         </ng-container>
     </ul>
 </div>
